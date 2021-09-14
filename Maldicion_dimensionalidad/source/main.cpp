@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <ctime>
 #include <math.h>
 #include <vector>
 #include <algorithm>
@@ -35,6 +36,8 @@ int main() {
             *j = generadorAleatorio();
     }
 
+    unsigned tInicio, tFin;        //para medir los tiempos
+    tInicio = clock();           //inicio de medición
     //CALCULO DE DISTANCIA ENTRE VECTORES
     vector<float> distanciasCalculadas;
     for (int** j = conjuntoDeVectores + 1; j < conjuntoDeVectores + cantidadVectores; j++)
@@ -50,6 +53,9 @@ int main() {
         float valor = floorf(((*it - minDist)/(maxDist-minDist)) * 10) / 10;
         ratios.push_back(valor);
     }
+
+    tFin = clock();           //fin de medición
+    double tiempoOrdenamiento = (double(tFin - tInicio) / CLOCKS_PER_SEC);
     //for (vector<float>::iterator it = ratios.begin(); it != ratios.end(); it++)    cout << *it << endl;
     //MOSTRAR RESULTADOS
     cout << "VALOR\t" << "CANTIDAD\n" << endl;
@@ -64,7 +70,7 @@ int main() {
     cout << "0.2\t" << count(ratios.begin(), ratios.end(), floorf(0.2 * 10) / 10) << endl;
     cout << "0.1\t" << count(ratios.begin(), ratios.end(), floorf(0.1 * 10) / 10) << endl;
     cout << "0\t" << count(ratios.begin(), ratios.end(), 0.0) << endl;
-
+    cout << "\nEl tiempo de ejecucion del algoritmo fue de:\t" << tiempoOrdenamiento << " s" << endl;
     //ELIMINACION DE VECTORES
     for (int** i = conjuntoDeVectores; i < conjuntoDeVectores + cantidadVectores; i++) {
         delete[] * i;
