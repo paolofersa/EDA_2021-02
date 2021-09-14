@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C90A2F93-D92B-3F8C-AFC9-D249AF60A2D5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

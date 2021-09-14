@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\build\CMakeFiles\17013e830b66d156a15c2b1b07c53400\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7727321D-18A8-3F6C-91DE-ECFC9BEBA2B4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

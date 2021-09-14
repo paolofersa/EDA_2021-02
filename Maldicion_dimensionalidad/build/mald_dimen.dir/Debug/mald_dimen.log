@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\source\main.cpp(20,31): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\source\main.cpp(36,36): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  mald_dimen.vcxproj -> D:\Documentos\UCSP\CCOMP\2021-02\EDA\Lab_git hub\EDA_2021-02\Maldicion_dimensionalidad\build\Debug\mald_dimen.exe

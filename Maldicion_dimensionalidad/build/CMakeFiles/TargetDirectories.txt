@@ -1,0 +1,3 @@
+D:/Documentos/UCSP/CCOMP/2021-02/EDA/Lab_git hub/EDA_2021-02/Maldicion_dimensionalidad/build/CMakeFiles/mald_dimen.dir
+D:/Documentos/UCSP/CCOMP/2021-02/EDA/Lab_git hub/EDA_2021-02/Maldicion_dimensionalidad/build/CMakeFiles/ALL_BUILD.dir
+D:/Documentos/UCSP/CCOMP/2021-02/EDA/Lab_git hub/EDA_2021-02/Maldicion_dimensionalidad/build/CMakeFiles/ZERO_CHECK.dir
