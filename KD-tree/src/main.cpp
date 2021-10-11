@@ -8,7 +8,7 @@
 #include <vector>
 #include "KDTree.hpp"
 
-#define TEST_BASIC_KD_TREE_ENABLED 0
+#define TEST_BASIC_KD_TREE_ENABLED 1
 #define TEST_MODERATE_KD_TREE_ENABLED 0
 #define TEST_HARDER_KD_TREE_ENABLED 0
 #define TEST_EDGE_CASE_KD_TREE_ENABLED 0
