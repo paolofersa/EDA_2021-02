@@ -6,9 +6,10 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <queue>
 #include "KDTree.hpp"
 
-#define TEST_BASIC_KD_TREE_ENABLED 1
+#define TEST_BASIC_KD_TREE_ENABLED 0
 #define TEST_MODERATE_KD_TREE_ENABLED 0
 #define TEST_HARDER_KD_TREE_ENABLED 0
 #define TEST_EDGE_CASE_KD_TREE_ENABLED 0
@@ -19,8 +20,8 @@
 #define TEST_NEAREST_NEIGHBOR_ENABLED 0
 #define TEST_MORE_NEAREST_NEIGHBOR_ENABLED 0
 
-#define TEST_BASIC_COPY_ENABLED 0
-#define TEST_MODERATE_COPY_ENABLED 0
+#define TEST_BASIC_COPY_ENABLED 1
+#define TEST_MODERATE_COPY_ENABLED 1
 
 template <size_t N, typename IteratorType>
 Point<N> point_from_range(IteratorType begin, IteratorType end) {

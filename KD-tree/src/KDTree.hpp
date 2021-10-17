@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <utility>
 #include <vector>
+#include <queue>
 #include "Point.hpp"
 using namespace std;
 
@@ -67,6 +68,7 @@ template <size_t N, typename ElemType>
 KDTree<N, ElemType>::KDTree() {
     dimension_ = N;
     size_ = 0;
+    root = nullptr;
 }
 
 template <size_t N, typename ElemType>
@@ -76,13 +78,17 @@ KDTree<N, ElemType>::~KDTree() {
 
 template <size_t N, typename ElemType>
 KDTree<N, ElemType>::KDTree(const KDTree &rhs) {
-  // TODO(me): Fill this in.
+    dimension_ = rhs.dimension_;
+    size_ = rhs.size_;
+    root = nullptr;
 }
 
 template <size_t N, typename ElemType>
 KDTree<N, ElemType> &KDTree<N, ElemType>::operator=(const KDTree &rhs) {
-  // TODO(me): Fill this in.
-  return *this;
+    dimension_ = rhs.dimension_;
+    size_ = rhs.size_;
+    root = rhs.root;
+    return *this;
 }
 
 template <size_t N, typename ElemType>
@@ -97,51 +103,70 @@ size_t KDTree<N, ElemType>::size() const {
 
 template <size_t N, typename ElemType>
 bool KDTree<N, ElemType>::empty() const {
-  return !root;
+    if (size_)
+        return false;
+    return true;
 }
 
 template <size_t N, typename ElemType>
 bool KDTree<N, ElemType>::contains(const Point<N> &pt) const {
-    KDNode<N, ElemType>** p;
+    KDNode<N, ElemType>*const* p;
     int _depth = 0;
     for (p = &root;
         *p && (*p)->point != pt;
-        (*p)->children[pt[_depth % N] > (*p)->point[_depth % N]], _depth++);
+        p = &((*p)->children[pt[_depth % N] > (*p)->point[_depth % N]]), _depth++);
     return *p != 0;
 }
 
 template <size_t N, typename ElemType>
 void KDTree<N, ElemType>::insert(const Point<N> &pt, const ElemType &value) {
-    KDNode<N, ElemType>** p;
+    KDNode<N, ElemType>** p = nullptr;
     int _depth = 0;
     for (p = &root;
         *p && (*p)->point != pt;
-        (*p)->children[pt[_depth % N] > (*p)->point[_depth % N]], _depth++);
+        p = &((*p)->children[pt[_depth % N] > (*p)->point[_depth % N]]), _depth++);
     if (*p == 0) {
         *p = new KDNode<N, ElemType>(pt,value, _depth);
         size_++;
     }
+    else
+        (*p)->value = value;
 }
 
 template <size_t N, typename ElemType>
 ElemType &KDTree<N, ElemType>::operator[](const Point<N> &pt) {
-  // TODO(me): Fill this in.
+    KDNode<N, ElemType>** p = nullptr;
+    int _depth = 0, value = 0;
+    for (p = &root;
+        *p && (*p)->point != pt;
+        p = &((*p)->children[pt[_depth % N] > (*p)->point[_depth % N]]), _depth++);
+    if (*p == 0) {
+        *p = new KDNode<N, ElemType>(pt, value, _depth);
+        size_++;
+    }
+    return (*p)->value;
 }
 
 template <size_t N, typename ElemType>
 ElemType &KDTree<N, ElemType>::at(const Point<N> &pt) {
-  KDNode<N, ElemType>** p;
+    KDNode<N, ElemType>*const* p;
     int _depth = 0;
     for (p = &root;
         *p && (*p)->point != pt;
-        (*p)->children[pt[_depth % N] > (*p)->point[_depth % N]], _depth++);
+        p = &((*p)->children[pt[_depth % N] > (*p)->point[_depth % N]]), _depth++);
     if (*p != 0)
         return (*p)->value;
 }
 
 template <size_t N, typename ElemType>
 const ElemType &KDTree<N, ElemType>::at(const Point<N> &pt) const {
-  // TODO(me): Fill this in.
+    KDNode<N, ElemType>* const* p;
+    int _depth = 0;
+    for (p = &root;
+        *p && (*p)->point != pt;
+        p = &((*p)->children[pt[_depth % N] > (*p)->point[_depth % N]]), _depth++);
+    if (*p != 0)
+        return (*p)->value;
 }
 
 template <size_t N, typename ElemType>
@@ -152,8 +177,7 @@ ElemType KDTree<N, ElemType>::knn_value(const Point<N> &key, size_t k) const {
 }
 
 template <size_t N, typename ElemType>
-vector<ElemType> KDTree<N, ElemType>::knn_query(const Point<N> &key,
-                                                     size_t k) const {
+vector<ElemType> KDTree<N, ElemType>::knn_query(const Point<N> &key, size_t k) const {
   // TODO(me): Fill this in.
   vector<ElemType> values;
   return values;
