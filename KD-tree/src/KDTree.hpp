@@ -10,7 +10,10 @@
 #include <utility>
 #include <vector>
 #include <queue>
+#include <tuple>
+#include <algorithm>
 #include "Point.hpp"
+#include <limits.h>
 using namespace std;
 
 template <size_t N, typename ElemType>
@@ -57,6 +60,8 @@ class KDTree {
   ElemType knn_value(const Point<N> &key, size_t k) const;  //knn mas cercano, retorna el valor mas comun de los k mas cercanos
 
   vector<ElemType> knn_query(const Point<N> &key, size_t k) const;      //devuelve vector con los vecinos mas cercanos
+
+  void find_neighbors(const Point<N>& key, KDNode<N, ElemType>* currentNode, vector<tuple<double, KDNode<N, ElemType>*>> &NNqueue, int k, int depth) const;
 
  private:
   size_t dimension_;        //dimension
@@ -170,17 +175,55 @@ const ElemType &KDTree<N, ElemType>::at(const Point<N> &pt) const {
 }
 
 template <size_t N, typename ElemType>
+void KDTree<N, ElemType>::find_neighbors(const Point<N>& key, KDNode<N, ElemType>* currentNode, vector<tuple<double, KDNode<N, ElemType>*>>& NNqueue, int k, int depth) const {
+    if (!currentNode)
+        return;
+    NNqueue.push_back(make_tuple(distances<N>(key, currentNode->point), currentNode));
+    sort(NNqueue.begin(), NNqueue.end());
+    if (NNqueue.size() > k)
+        NNqueue.pop_back();
+    int axis = depth % dimension_;
+    bool right = false;
+    if (key[axis] < currentNode->point[axis]) {
+        right = true;
+        find_neighbors(key, currentNode->children[0], NNqueue, k, ++depth);
+    }
+    else {
+        right = false;
+        find_neighbors(key, currentNode->children[1], NNqueue, k, ++depth);
+    }
+    if (fabs(currentNode->point[axis] - key[axis]) < get<0>(*(NNqueue.end() - 1))) {
+        if(right)
+            find_neighbors(key, currentNode->children[0], NNqueue, k, ++depth);
+        else
+            find_neighbors(key, currentNode->children[1], NNqueue, k, ++depth);
+    }
+}
+
+template <size_t N, typename ElemType>
 ElemType KDTree<N, ElemType>::knn_value(const Point<N> &key, size_t k) const {
-  // TODO(me): Fill this in.
-  ElemType new_element;
-  return new_element;
+    vector<ElemType> values = knn_query(key, k);
+    vector<tuple<int, ElemType>> counts;
+    for (vector<ElemType>::iterator it = values.begin(); it != values.end(); it++) {
+        counts.push_back(make_tuple(count(values.begin(),values.end(),*it),*it));
+    }
+    sort(counts.begin(), counts.end());
+    reverse(counts.begin(), counts.end());
+
+    ElemType new_element = get<1>(counts[0]);
+    return new_element;
 }
 
 template <size_t N, typename ElemType>
 vector<ElemType> KDTree<N, ElemType>::knn_query(const Point<N> &key, size_t k) const {
-  // TODO(me): Fill this in.
-  vector<ElemType> values;
-  return values;
+    vector<tuple<double, KDNode<N, ElemType>*>> NNqueue;
+    find_neighbors(key, root, NNqueue, k, 0);
+    
+    vector<ElemType> values;
+    for (vector<tuple<double, KDNode<N, ElemType>*>>::iterator it = NNqueue.begin(); it != NNqueue.end(); it++)
+        values.push_back(get<1>(*it)->value);
+
+    return values;
 }
 
 // TODO(me): finish the implementation of the rest of the KDTree class

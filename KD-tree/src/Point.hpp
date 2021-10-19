@@ -84,7 +84,7 @@ typename Point<N>::const_iterator Point<N>::end() const {
 }
 
 template <size_t N>
-double distance(const Point<N>& one, const Point<N>& two) {
+double distances(const Point<N>& one, const Point<N>& two) {
   double result = 0.0;
   for (size_t i = 0; i < N; ++i) {
     result += (one[i] - two[i]) * (one[i] - two[i]);
