@@ -9,6 +9,7 @@ De igual forma los archivos se encuentran almacenados en Google Drive en las sig
 
 Para la ejecución adecuada del programa:
  (1) Verificar que se encuentren los archivos "test.csv" y "train.csv" dentro del directorio /resources
+   (1.1) En caso no estén, descargar los archivos "test.csv" y "train.csv" de los enlaces anteriores y colocarlos en directorio: /resources
  (2) Crear directorio vacío /build (para ejecutar CMake)
  (3) Ejecutar el archivo CMakeLists.txt
 
@@ -22,3 +23,7 @@ Consideraciones del programa:
    -	Se visualizarán el tiempo de la consulta y la recuperación de los datos, así como todos los elementos recuperados
 	en un vector de respuesta (vector<ImageStructure<string>> answer). Cada elemento mostrará el número de imagen, a qué conjunto de datos pertenece (train, test),
 	y la etiqueta de número (0-9) en caso la tenga (para conjuntos de datos de train).
+
+
+*TODOS LOS ARCHIVOS COMPLETOS CON EL CMAKE LISTO PARA EJECUTAR SE ENCUENTRAN EN EL SIGUIENTE REPOSITORIO DE GITHUB:
+https://github.com/paolofersa/EDA_2021-02/tree/main/Tertiary_Hash_Tree
